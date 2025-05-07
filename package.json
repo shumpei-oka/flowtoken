@@ -1,10 +1,10 @@
 {
   "name": "flowtoken",
-  "version": "1.0.20",
+  "version": "1.0.35",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && cp src/components/*.css dist/components && rm -rf dist/stories && rm -rf dist/src",
+    "build": "tsc && cp src/*.css dist && rm -rf dist/stories && rm -rf dist/src",
     "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -50,6 +50,7 @@
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "regexp-tree": "^0.1.27",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0"
   }
 }

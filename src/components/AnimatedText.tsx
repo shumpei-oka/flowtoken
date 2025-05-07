@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './animations.css';
 
 interface StreamingFadeInTextProps {
     incomingText: string;  // Each new token received for display
@@ -8,7 +7,6 @@ interface StreamingFadeInTextProps {
 }
 
 const StreamingFadeInText: React.FC<StreamingFadeInTextProps> = ({ incomingText, animation="", sep="token" }) => {
-    // console.log('sep:', sep);
     const [animatingTokens, setAnimatingTokens] = useState<{token: string, id: number}[]>([]);
     const [completedTokens, setCompletedTokens] = useState<string[]>([]);
     const lastTokenTime = useRef<number | null>(performance.now());

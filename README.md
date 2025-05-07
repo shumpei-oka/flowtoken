@@ -1,4 +1,3 @@
-
 # FlowToken 🌊
 ### A smooth Animation Library for LLM Text Streaming
 
@@ -40,13 +39,15 @@ To use markdown, import the `AnimatedMarkdown` component.
 
 ```jsx
 import React from 'react';
+
 import { AnimatedMarkdown } from 'flowtoken';
+// import the flowtoken css in order to use the animations
+import 'flowtoken/dist/styles.css';
 
 const App = () => {
   return (
     <AnimatedMarkdown
       content="## Hello, world!"
-      sep="word"
       animation="fadeIn"
       animationDuration="0.5s"
       animationTimingFunction="ease-in-out"
@@ -64,6 +65,7 @@ export default App;
 
 import { useChat } from 'ai/react'
 import { AnimatedMarkdown } from 'flowtoken';
+import 'flowtoken/dist/styles.css';
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat()
@@ -73,8 +75,7 @@ export default function Chat() {
       {messages.map(m => (
         <div key={m.id}>
           {m.role}: <AnimatedMarkdown content={m.content}
-            sep="word"
-            animation={"fadeIn"}
+            animation="dropIn"
             animationDuration="0.5s"
             animationTimingFunction="ease-in-out"
             />
@@ -97,7 +98,21 @@ export default function Chat() {
 
 ### Custom Components
 
-You can use custom components by passing a `customComponents` prop to the `AnimatedMarkdown` component where the key is the regex pattern (ex. `/\{\{.*?\}\}/`) or HTML tag (ex. `MyComponent`) to match and the value is the component to render. Then just prompt your LLM to output the custom component syntax and it will be rendered with your custom component.
+You can use custom components by passing a `customComponents` prop to the `AnimatedMarkdown` component where the key is xml tag (ex. `MyComponent`) to match and the value is the component to render. Then just prompt your LLM to output the custom component syntax and it will be rendered with your custom component.
+
+```jsx
+const customComponents = {
+  'customcomponent': ({ animateText, node, children, ...props }: any) => {
+    return (
+      <>
+        {animateText(<div {...props}>{children}</div>)}
+      </>
+    )
+  },
+}
+...
+<AnimatedMarkdown content="Hello, world! <customcomponent>This is a custom component</customcomponent>" customComponents={customComponents} />
+```
 
 #### Example
 
@@ -106,14 +121,15 @@ This is an example of a custom component. <ArticlePreview triggerText="Github" t
 
 ### AnimatedMarkdown Props
 
-- **content**: The text to be displayed.
-- **sep**: `word` or `char`.
-- **animation**: Name of the CSS animation to apply. See below for options or define your own in css.
-- **animationDuration**: CSS Duration of the animation. Ex. `0.6s`
-- **animationTimingFunction**: CSS Timing function of the animation. Ex. `ease`, `ease-in-out`, etc
-- **codeStyle**: The highlighter js style object to use.
-- **customComponents**: An object where the key is the regex pattern (ex. `/\{\{.*?\}\}/`) or HTML tag (ex. `MyComponent`) to match and the value is the react component to render.
-- **htmlComponents**: An object where the key is the HTML tag (ex. `code`, `h1`, `h2`, etc) to match and the value is the react component to render.
+- **content** (string): The text to be displayed.  
+- **sep** (`"word"` | `"char"`): How to split and animate the content. Defaults to `"word"`.  
+- **animation** (string | `null`): Name of the CSS animation to apply (e.g. `fadeIn`, `dropIn`). Set to `null` to disable animations on completed messages.  
+- **animationDuration** (string): CSS duration of the animation (e.g. `0.6s`).  
+- **animationTimingFunction** (string): CSS timing function for the animation (e.g. `ease`, `ease-in-out`).  
+- **codeStyle** (object): The syntax-highlighter style object to use for code blocks.  
+- **customComponents** (Record<string, React.ComponentType>):  
+  Map of regex patterns or custom tag names to React components. Use this to render arbitrary LLM-emitted syntax.  
+- **imgHeight** (string): Default height for rendered images (e.g. `200px`).  
 
 ## Animations
 
@@ -132,7 +148,30 @@ FlowToken supports various CSS animations:
 - **slideUp**
 - **wave**
 
-For custom animations, define your keyframes in CSS and pass the animation name to the `animation` prop.
+For custom animations, define your keyframes in CSS wrap it in a class and pass the animation name to the `animation` prop.
+
+```css
+/* custom-styles.css */
+
+@keyframes custom-animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.custom-animation {
+  animation: custom-animation 1s ease-in-out;
+}
+```
+
+```jsx
+import 'custom-styles.css';
+...
+<AnimatedMarkdown content="Hello, world!" animation="custom-animation" />
+```
 
 ### Notes
 
@@ -141,43 +180,6 @@ To lower the memory footprint, disable animations by setting the `animation` par
 If using tailwind with generated markdown, be sure to setup tailwind typography: [https://github.com/tailwindlabs/tailwindcss-typography](here)
 
 and add `prose lg:prose-md prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent` to your flowtoken markdown container.
-
-## StreamText
-
-Here is a simple example of how to use the `StreamText` component from FlowToken, which does not render markdown:
-
-```jsx
-import React from 'react';
-import { StreamText } from 'flowtoken';
-
-const App = () => {
-  return (
-    <StreamText
-      content="Hello, world!"
-      windowSize={5}
-      delayMultiplier={1.1}
-      sep="word"
-      animation="fadeIn"
-      animationDuration="0.5s"
-      animationTimingFunction="ease-in-out"
-    />
-  );
-};
-
-export default App;
-```
-
-This includes the option to smooth the rate of text display in effect reducing fluctuations in token generation speed by applying a simple moving average.
-
-### StreamText Props
-
-- **content**: The text to be displayed.
-- **windowSize**: Number of tokens to consider for smoothing animations.
-- **delayMultiplier**: Multiplier to adjust the delay for each token or character's appearance.
-- **sep**: `word` or `char`
-- **animation**: Name of the CSS animation to apply.
-- **animationDuration**: Duration of the animation.
-- **animationTimingFunction**: Timing function of the animation.
 
 ## Contributing
 
