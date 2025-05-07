@@ -9,19 +9,18 @@ import AnimatedImage from './AnimatedImage';
 import { animations } from '../utils/animations';
 import DefaultCode from './DefaultCode';
 
-interface SmoothTextProps {
+interface MarkdownAnimateTextProps {
     content: string;
     sep?: string;
     animation?: string;
     animationDuration?: string;
     animationTimingFunction?: string;
     codeStyle?: any;
-    htmlComponents?: Record<string, (elements: any) => React.ReactNode>;
     customComponents?: Record<string, any>;
     imgHeight?: string;
 }
 
-const MarkdownAnimateText: React.FC<SmoothTextProps> = ({
+const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
     content,
     sep = "diff",
     animation: animationName = "fadeIn",

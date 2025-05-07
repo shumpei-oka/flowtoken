@@ -1,6 +1,6 @@
 {
   "name": "flowtoken",
-  "version": "1.0.21",
+  "version": "1.0.34",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
