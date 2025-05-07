@@ -41,6 +41,7 @@ To use markdown, import the `AnimatedMarkdown` component.
 ```jsx
 import React from 'react';
 import { AnimatedMarkdown } from 'flowtoken';
+import 'flowtoken/dist/styles.css';
 
 const App = () => {
   return (

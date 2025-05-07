@@ -1,31 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import SmoothText from '../src/components/SmoothText'; // Adjust the import path accordingly
-import StreamingFadeInText from '../src/components/FadeIn';
+import StreamingFadeInText from '../src/components/AnimatedText';
 
 interface RandomTextSenderProps {
     initialText: string;
     windowSize: number;  // Propagate this to SmoothText for consistency
     animation?: string;  // Animation name
     sep?: string;  // Token separator
-}
-
-function FadeInExample() {
-    const [opacity, setOpacity] = useState(0); // Start with 0 opacity
-
-    useEffect(() => {
-        // Change the opacity to 1 after the component mounts
-        const timeout = setTimeout(() => {
-            setOpacity(1);
-        }, 1000);
-
-        return () => clearTimeout(timeout);
-    }, []);
-
-    return (
-        <div style={{ flex: 1, opacity: opacity, transition: 'opacity 1s ease-in-out' }}>
-            Hello, world!
-        </div>
-    );
 }
 
 const RandomTextSender: React.FC<RandomTextSenderProps> = ({ initialText, windowSize, animation, sep }) => {
