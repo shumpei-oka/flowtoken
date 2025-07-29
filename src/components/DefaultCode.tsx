@@ -3,7 +3,7 @@ import React from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { IconCheck, IconCopy } from "@tabler/icons-react";
 import { Button } from './ui/button';
-import { cn } from '../lib/utils';
+import { cn } from '../utils';
 import customCodeRenderer from './CodeRenderer';
 
 interface DefaultCodeProps {
