@@ -133,8 +133,7 @@ const ShikiCodeRenderer: React.FC<ShikiCodeRendererProps> = ({
         margin: 0,
         padding: "1rem",
         background: "transparent",
-        fontSize: "0.875rem",
-        borderRadius: 0,
+        fontSize: "0.775rem",
         overflow: "auto",
       }}
     >
