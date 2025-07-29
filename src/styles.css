@@ -162,11 +162,7 @@
 }
 
 /* Override Tailwind Typography .prose styles for code blocks */
-.prose pre {
+.prose .rounded-b-xl {
   overflow: visible !important;
   border-radius: 0 0 0.75rem 0.75rem !important;
-}
-
-.prose code {
-  overflow: visible !important;
 }
