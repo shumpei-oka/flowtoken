@@ -88,7 +88,7 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
         </Button>
       </div>
       {/* Content section */}
-      <div className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900 overflow-hidden">
+      <div className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900">
         <ShikiCodeRenderer
           codeContent={codeContent}
           language={language}
