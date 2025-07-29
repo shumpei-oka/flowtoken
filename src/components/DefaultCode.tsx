@@ -56,7 +56,7 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     <div {...props} style={style} className="relative my-2">
       {/* Header section */}
       <div className="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 px-1 py-1 rounded-t-xl border border-b-0 border-zinc-200 dark:border-zinc-700">
-        <div className="pl-3">
+        <div style={{ paddingLeft: '0.75rem' }}>
           <span className="text-xs text-zinc-900 dark:text-zinc-50">
             {language}
           </span>
