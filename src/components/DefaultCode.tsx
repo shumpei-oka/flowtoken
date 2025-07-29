@@ -56,9 +56,11 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     <div {...props} style={style} className="relative my-2">
       {/* Header section */}
       <div className="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 px-1 py-1 rounded-t-xl border border-b-0 border-zinc-200 dark:border-zinc-700">
-        <span className="text-xs ml-3 text-zinc-900 dark:text-zinc-50">
-          {language}
-        </span>
+        <div className="pl-3">
+          <span className="text-xs text-zinc-900 dark:text-zinc-50">
+            {language}
+          </span>
+        </div>
         <Button
           variant="ghost"
           size="sm"
@@ -88,9 +90,9 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
         </Button>
       </div>
       {/* Content section */}
-      <div 
+      <div
         className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900"
-        style={{ overflow: 'visible' }}
+        style={{ overflow: "visible" }}
       >
         <ShikiCodeRenderer
           codeContent={codeContent}
