@@ -135,6 +135,7 @@ const ShikiCodeRenderer: React.FC<ShikiCodeRendererProps> = ({
         background: "transparent",
         fontSize: "0.775rem",
         overflow: "auto",
+        borderRadius: "0 0 0.75rem 0.75rem", // rounded-b-xl
       }}
     >
       <code>{renderedTokens}</code>
