@@ -1,5 +1,5 @@
 import React from "react";
-import { codeToTokens, type BundledLanguage, bundledLanguages } from "shiki";
+import type { BundledLanguage } from "shiki";
 
 interface ShikiCodeRendererProps {
   codeContent: string;
@@ -52,6 +52,9 @@ const ShikiCodeRenderer: React.FC<ShikiCodeRendererProps> = ({
   React.useEffect(() => {
     const renderCode = async () => {
       try {
+        // Dynamic import to avoid serverExternalPackages issues
+        const { codeToTokens, bundledLanguages } = await import("shiki");
+        
         // Check if language is valid, fallback to 'text' if invalid
         const validLanguage =
           language in bundledLanguages

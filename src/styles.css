@@ -160,3 +160,13 @@
 .ft-code-block {
   animation: var(--ft-marker-animation);
 }
+
+/* Override Tailwind Typography .prose styles for code blocks */
+.prose pre {
+  overflow: visible !important;
+  border-radius: 0 0 0.75rem 0.75rem !important;
+}
+
+.prose code {
+  overflow: visible !important;
+}
