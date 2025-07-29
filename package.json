@@ -1,7 +1,7 @@
 {
-  "name": "flowtoken",
-  "version": "1.0.35",
-  "description": "",
+  "name": "@shumpei-oka/flowtoken",
+  "version": "1.0.0",
+  "description": "Animated React components for streaming text and markdown with modern design (forked from flowtoken)",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && cp src/*.css dist && rm -rf dist/stories && rm -rf dist/src",
@@ -10,17 +10,29 @@
     "build-storybook": "storybook build"
   },
   "keywords": [
+    "react",
+    "typescript",
+    "animation",
+    "markdown",
+    "streaming",
+    "text",
+    "ui",
+    "components",
     "ai",
     "generative ui",
-    "flowtoken",
-    "tokenflow",
-    "ai react",
-    "react ai library",
-    "flowtoken ai",
-    "tokenflow ai"
+    "shadcn",
+    "flowtoken"
   ],
-  "author": "ephibbs",
+  "author": "shumpei-oka",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shumpei-oka/flowtoken.git"
+  },
+  "homepage": "https://github.com/shumpei-oka/flowtoken#readme",
+  "bugs": {
+    "url": "https://github.com/shumpei-oka/flowtoken/issues"
+  },
   "devDependencies": {
     "@chromatic-com/storybook": "^3.2.2",
     "@storybook/addon-essentials": "^8.4.1",
@@ -47,10 +59,15 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "@tabler/icons-react": "^3.34.1",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "regexp-tree": "^0.1.27",
     "rehype-raw": "^7.0.0",
-    "remark-gfm": "^4.0.0"
+    "remark-gfm": "^4.0.0",
+    "tailwind-merge": "^3.3.1"
   }
 }

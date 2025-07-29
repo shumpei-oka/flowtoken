@@ -90,6 +90,9 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
                     animationTimingFunction={animationTimingFunction}
                     animationIterationCount={1}
                 />;
+            } else if (React.isValidElement(input)) {
+                // React要素の場合はそのまま返す
+                return input;
             } else {
                 // Return non-string, non-element inputs unchanged (null, undefined, etc.)
                 return <span key={`pcc-${keyCounter++}`} style={{
@@ -121,7 +124,37 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
          h5: ({ node, ...props }: any) => <h5 {...props}>{animateText(props.children)}</h5>,
          h6: ({ node, ...props }: any) => <h6 {...props}>{animateText(props.children)}</h6>,
          p: ({ node, ...props }: any) => <p {...props}>{animateText(props.children)}</p>,
-         li: ({ node, ...props }: any) => <li {...props} className="custom-li" style={animationStyle}>{animateText(props.children)}</li>,
+         ol: ({ node, children, ...props }: any) => (
+            <ol className="list-decimal list-outside pl-4 marker:text-secondary-foreground" {...props}>
+                {children}
+            </ol>
+        ),
+        ul: ({ node, children, ...props }: any) => (
+            <ul className="list-disc list-outside pl-4 marker:text-secondary-foreground" {...props}>
+                {children}
+            </ul>
+        ),
+        li: ({ node, children, ...props }: any) => {
+            // タスクリストアイテムかどうかを判定
+            const className = node?.properties?.className;
+            const isTaskListItem = Array.isArray(className) 
+                ? className.includes('task-list-item')
+                : typeof className === 'string' && className.includes('task-list-item');
+            
+            if (isTaskListItem) {
+                return (
+                    <li className="my-2 ml-1 pl-1 break-words task-list-item flex items-start gap-2" style={animationStyle} {...props}>
+                        {animateText(children)}
+                    </li>
+                );
+            }
+            
+            return (
+                <li className="my-2 ml-1 pl-1 break-words" style={animationStyle} {...props}>
+                    {animateText(children)}
+                </li>
+            );
+        },
          a: ({ node, ...props }: any) => <a {...props} href={props.href} target="_blank" rel="noopener noreferrer">{animateText(props.children)}</a>,
          strong: ({ node, ...props }: any) => <strong {...props}>{animateText(props.children)}</strong>,
          em: ({ node, ...props }: any) => <em {...props}>{animateText(props.children)}</em>,
