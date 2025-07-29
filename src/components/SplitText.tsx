@@ -93,6 +93,16 @@ const TokenizedText = ({ input, sep, animation, animationDuration, animationTimi
         return token !== null && typeof token === 'object' && 'text' in token && 'source' in token;
     };
 
+    // Apply animation style only once instead of creating it repeatedly
+    const animationStyle = React.useMemo(() => ({
+        animationName: animation,
+        animationDuration,
+        animationTimingFunction, 
+        animationIterationCount,
+        whiteSpace: 'pre-wrap',
+        display: 'inline-block',
+    }), [animation, animationDuration, animationTimingFunction, animationIterationCount]);
+
     return (
         <>
             {tokens?.map((token, index) => {
@@ -113,14 +123,7 @@ const TokenizedText = ({ input, sep, animation, animationDuration, animationTimi
                 }
                 
                 return (
-                    <span key={key} style={{
-                        animationName: animation,
-                        animationDuration,
-                        animationTimingFunction, 
-                        animationIterationCount,
-                        whiteSpace: 'pre-wrap',
-                        display: 'inline-block',
-                    }}>
+                    <span key={key} style={animationStyle}>
                         {text}
                     </span>
                 );
@@ -129,4 +132,4 @@ const TokenizedText = ({ input, sep, animation, animationDuration, animationTimi
     );
 };
 
-export default TokenizedText;
+export default React.memo(TokenizedText); // Memoize the entire component to prevent unnecessary rerenders

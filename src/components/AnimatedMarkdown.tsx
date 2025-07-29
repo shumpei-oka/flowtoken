@@ -20,6 +20,52 @@ interface MarkdownAnimateTextProps {
   imgHeight?: string;
 }
 
+// Function to create animation style object - extracted outside of component
+const createAnimationStyle = (
+  animation: string | null,
+  animationDuration: string,
+  animationTimingFunction: string
+) => ({
+  animation: animation
+    ? `${animation} ${animationDuration} ${animationTimingFunction}`
+    : "none",
+});
+
+// Memoized component for text elements to avoid creating many instances
+const MemoizedText = React.memo(
+  ({
+    children,
+    animation,
+    animationDuration,
+    animationTimingFunction,
+    sep,
+  }: any) => (
+    <TokenizedText
+      input={children}
+      sep={sep}
+      animation={animation}
+      animationDuration={animationDuration}
+      animationTimingFunction={animationTimingFunction}
+      animationIterationCount={1}
+    />
+  )
+);
+
+// Optimize rendering for lists to reduce memory usage
+const MemoizedList = React.memo(
+  ({
+    children,
+    style,
+  }: {
+    children: React.ReactNode;
+    style: React.CSSProperties;
+  }) => (
+    <li className="ft-custom-li" style={style}>
+      {children}
+    </li>
+  )
+);
+
 const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
   content,
   sep = "diff",
@@ -33,10 +79,16 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
   const animation =
     animations[animationName as keyof typeof animations] || animationName;
 
-  // Shiki handles theming internally, no need for external styles
-  const animationStyle: any = {
-    animation: `${animation} ${animationDuration} ${animationTimingFunction}`,
-  };
+  // Memoize the animation style to avoid recreating it on every render
+  const animationStyle = React.useMemo(
+    () =>
+      createAnimationStyle(
+        animation,
+        animationDuration,
+        animationTimingFunction
+      ),
+    [animation, animationDuration, animationTimingFunction]
+  );
 
   // Enhanced hidePartialCustomComponents function that also handles tag attributes
   const hidePartialCustomComponents = React.useCallback(
@@ -77,68 +129,85 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
     [customComponents]
   );
 
-  // Memoize animateText function to prevent recalculations if props do not change
-  const animateText: (text: string | Array<any>) => React.ReactNode =
-    React.useCallback(
-      (text: string | Array<any>) => {
-        text = Array.isArray(text) ? text : [text];
-        let keyCounter = 0;
-        const processText: (
-          input: any,
-          keyPrefix?: string
-        ) => React.ReactNode = (input: any, keyPrefix: string = "item") => {
-          if (Array.isArray(input)) {
-            // Process each element in the array
-            return input.map((element, index) => (
-              <React.Fragment key={`${keyPrefix}-${index}`}>
-                {processText(element, `${keyPrefix}-${index}`)}
-              </React.Fragment>
-            ));
-          } else if (typeof input === "string") {
-            // if (!animation) return input;
-            return (
-              <TokenizedText
-                key={`pcc-${keyCounter++}`}
-                input={hidePartialCustomComponents(input)}
-                sep={sep}
-                animation={animation}
-                animationDuration={animationDuration}
-                animationTimingFunction={animationTimingFunction}
-                animationIterationCount={1}
-              />
-            );
-          } else {
-            // Return non-string, non-element inputs unchanged (null, undefined, etc.)
-            return (
-              <span
-                key={`pcc-${keyCounter++}`}
-                style={{
-                  animationName: animation,
-                  animationDuration,
-                  animationTimingFunction,
-                  animationIterationCount: 1,
-                  whiteSpace: "pre-wrap",
-                  display: "inline-block",
-                }}
-              >
-                {input}
-              </span>
-            );
+  // Memoize animateText function to prevent recreations
+  const animateText = React.useCallback(
+    (text: string | Array<any>) => {
+      text = Array.isArray(text) ? text : [text];
+
+      if (!animation) return text;
+
+      return text.map((item, index) => {
+        if (typeof item === "string") {
+          return (
+            <MemoizedText
+              key={`text-${index}`}
+              children={hidePartialCustomComponents(item)}
+              animation={animation}
+              animationDuration={animationDuration}
+              animationTimingFunction={animationTimingFunction}
+              sep={sep}
+            />
+          );
+        } else if (React.isValidElement(item)) {
+          // Check if the React element is one of the types we don't want to animate
+          const noAnimateElementTypes: Array<React.ElementType> = [
+            "br",
+            "ul",
+            "ol",
+            "td",
+            "th",
+          ];
+          let typeName = item.type;
+          if (typeof typeName === "function") {
+            typeName = typeName.name;
           }
-        };
-        if (!animation) {
-          return text;
+          if (
+            typeof typeName === "string" &&
+            noAnimateElementTypes.includes(typeName as React.ElementType)
+          ) {
+            return item;
+          }
+          return (
+            <span
+              key={`other-element-${index}`}
+              style={{
+                animationName: animation,
+                animationDuration,
+                animationTimingFunction,
+                animationIterationCount: 1,
+                whiteSpace: "pre-wrap",
+                display: "inline-block",
+              }}
+            >
+              {item}
+            </span>
+          );
         }
-        return processText(text);
-      },
-      [
-        animation,
-        animationDuration,
-        animationTimingFunction,
-        sep,
-        hidePartialCustomComponents,
-      ]
-    );
+        return (
+          <span
+            key={`other-${index}`}
+            style={{
+              animationName: animation,
+              animationDuration,
+              animationTimingFunction,
+              animationIterationCount: 1,
+              whiteSpace: "pre-wrap",
+              display: "inline-block",
+            }}
+          >
+            {item}
+          </span>
+        );
+      });
+    },
+    [
+      animation,
+      animationDuration,
+      animationTimingFunction,
+      sep,
+      hidePartialCustomComponents,
+    ]
+  );
 
   // Memoize components object to avoid redefining components unnecessarily
   const components: any = React.useMemo(
@@ -165,6 +234,7 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
       p: ({ node, ...props }: any) => (
         <p {...props}>{animateText(props.children)}</p>
       ),
+      //
       li: ({ node, ...props }: any) => <li {...props}>{props.children}</li>,
       a: ({ node, ...props }: any) => (
         <a
@@ -268,4 +338,4 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
   );
 };
 
-export default MarkdownAnimateText;
+export default React.memo(MarkdownAnimateText);
