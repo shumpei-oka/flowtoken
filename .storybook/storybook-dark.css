@@ -1,0 +1,202 @@
+/* Storybook Dark Mode Custom Styles - Zinc Color Palette */
+
+/* Controls panel styling */
+.dark [data-testid="control-panel"] {
+  background-color: #18181b !important; /* zinc-900 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Input fields in controls - Storybook UI only */
+.dark [data-testid="control-panel"] input,
+.dark [data-testid="control-panel"] textarea,
+.dark [data-testid="control-panel"] select,
+.dark [data-panel-id] input,
+.dark [data-panel-id] textarea,
+.dark [data-panel-id] select,
+.dark .sb-addon-panel input,
+.dark .sb-addon-panel textarea,
+.dark .sb-addon-panel select {
+  background-color: #27272a !important; /* zinc-800 */
+  border-color: #3f3f46 !important; /* zinc-700 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+.dark [data-testid="control-panel"] input:focus,
+.dark [data-testid="control-panel"] textarea:focus,
+.dark [data-testid="control-panel"] select:focus,
+.dark [data-panel-id] input:focus,
+.dark [data-panel-id] textarea:focus,
+.dark [data-panel-id] select:focus,
+.dark .sb-addon-panel input:focus,
+.dark .sb-addon-panel textarea:focus,
+.dark .sb-addon-panel select:focus {
+  border-color: #71717a !important; /* zinc-500 */
+  box-shadow: 0 0 0 1px #71717a !important; /* zinc-500 */
+}
+
+/* Dropdown menus */
+.dark [role="listbox"],
+.dark [role="menu"] {
+  background-color: #18181b !important; /* zinc-900 */
+  border-color: #27272a !important; /* zinc-800 */
+}
+
+.dark [role="option"],
+.dark [role="menuitem"] {
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+.dark [role="option"]:hover,
+.dark [role="menuitem"]:hover {
+  background-color: #27272a !important; /* zinc-800 */
+}
+
+/* Addon panels */
+.dark [data-panel-id] {
+  background-color: #18181b !important; /* zinc-900 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Tables in controls */
+.dark [data-testid="control-panel"] table,
+.dark [data-panel-id] table,
+.dark .sb-addon-panel table {
+  background-color: #18181b !important; /* zinc-900 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+.dark [data-testid="control-panel"] table th,
+.dark [data-testid="control-panel"] table td,
+.dark [data-panel-id] table th,
+.dark [data-panel-id] table td,
+.dark .sb-addon-panel table th,
+.dark .sb-addon-panel table td {
+  border-color: #27272a !important; /* zinc-800 */
+}
+
+/* Code blocks in Storybook UI only */
+.dark [data-testid="control-panel"] pre,
+.dark [data-testid="control-panel"] code,
+.dark [data-panel-id] pre,
+.dark [data-panel-id] code,
+.dark .sb-addon-panel pre,
+.dark .sb-addon-panel code {
+  background-color: #09090b !important; /* zinc-950 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Scrollbars */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #18181b; /* zinc-900 */
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46; /* zinc-700 */
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #52525b; /* zinc-600 */
+}
+
+/* Toggle buttons and checkboxes in Storybook UI */
+.dark [data-testid="control-panel"] input[type="checkbox"],
+.dark [data-panel-id] input[type="checkbox"],
+.dark .sb-addon-panel input[type="checkbox"] {
+  background-color: #27272a !important; /* zinc-800 */
+  border-color: #3f3f46 !important; /* zinc-700 */
+}
+
+.dark [data-testid="control-panel"] input[type="checkbox"]:checked,
+.dark [data-panel-id] input[type="checkbox"]:checked,
+.dark .sb-addon-panel input[type="checkbox"]:checked {
+  background-color: #71717a !important; /* zinc-500 */
+  border-color: #71717a !important; /* zinc-500 */
+}
+
+/* Range sliders in Storybook UI */
+.dark [data-testid="control-panel"] input[type="range"],
+.dark [data-panel-id] input[type="range"],
+.dark .sb-addon-panel input[type="range"] {
+  background-color: #27272a !important; /* zinc-800 */
+}
+
+.dark [data-testid="control-panel"] input[type="range"]::-webkit-slider-thumb,
+.dark [data-panel-id] input[type="range"]::-webkit-slider-thumb,
+.dark .sb-addon-panel input[type="range"]::-webkit-slider-thumb {
+  background-color: #71717a !important; /* zinc-500 */
+}
+
+.dark [data-testid="control-panel"] input[type="range"]::-moz-range-thumb,
+.dark [data-panel-id] input[type="range"]::-moz-range-thumb,
+.dark .sb-addon-panel input[type="range"]::-moz-range-thumb {
+  background-color: #71717a !important; /* zinc-500 */
+  border-color: #71717a !important; /* zinc-500 */
+}
+
+/* Tabs */
+.dark [role="tab"] {
+  color: #a1a1aa !important; /* zinc-400 */
+  border-bottom-color: transparent !important;
+}
+
+.dark [role="tab"][aria-selected="true"] {
+  color: #71717a !important; /* zinc-500 */
+  border-bottom-color: #71717a !important; /* zinc-500 */
+}
+
+/* Tooltips */
+.dark [role="tooltip"] {
+  background-color: #27272a !important; /* zinc-800 */
+  color: #f4f4f5 !important; /* zinc-100 */
+  border-color: #3f3f46 !important; /* zinc-700 */
+}
+
+/* Search input in Storybook UI */
+.dark [data-testid="control-panel"] input[type="search"],
+.dark [data-panel-id] input[type="search"],
+.dark .sb-addon-panel input[type="search"] {
+  background-color: #27272a !important; /* zinc-800 */
+  border-color: #3f3f46 !important; /* zinc-700 */
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Labels in Storybook UI */
+.dark [data-testid="control-panel"] label,
+.dark [data-panel-id] label,
+.dark .sb-addon-panel label {
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+/* Buttons in Storybook UI */
+.dark [data-testid="control-panel"] button,
+.dark [data-panel-id] button,
+.dark .sb-addon-panel button {
+  color: #f4f4f5 !important; /* zinc-100 */
+}
+
+.dark
+  [data-testid="control-panel"]
+  button:not([class*="primary"]):not([class*="secondary"]),
+.dark [data-panel-id] button:not([class*="primary"]):not([class*="secondary"]),
+.dark .sb-addon-panel button:not([class*="primary"]):not([class*="secondary"]) {
+  background-color: #27272a !important; /* zinc-800 */
+  border-color: #3f3f46 !important; /* zinc-700 */
+}
+
+.dark
+  [data-testid="control-panel"]
+  button:not([class*="primary"]):not([class*="secondary"]):hover,
+.dark
+  [data-panel-id]
+  button:not([class*="primary"]):not([class*="secondary"]):hover,
+.dark
+  .sb-addon-panel
+  button:not([class*="primary"]):not([class*="secondary"]):hover {
+  background-color: #3f3f46 !important; /* zinc-700 */
+}

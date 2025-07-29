@@ -8,6 +8,11 @@ interface TokenWithSource {
 type TokenType = string | TokenWithSource | ReactElement;
 
 const TokenizedText = ({ input, sep, animation, animationDuration, animationTimingFunction, animationIterationCount }: any) => {
+    // Early return for no animation case
+    if (animation === 'none' || !animation) {
+        return <>{input}</>;
+    }
+
     // Track previous input to detect changes
     const prevInputRef = useRef<string>('');
     // Track tokens with their source for proper keying in diff mode
