@@ -1,7 +1,8 @@
 {
   "include": ["src"], /* Include only the src directory */
   "compilerOptions": {
-    "target": "es2016" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "target": "es2017" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "lib": ["es2017", "dom"],
     "module": "commonjs" /* Specify what module code is generated. */,
     "declaration": true /* Generate .d.ts files from TypeScript and JavaScript files in your project. */,
     "outDir": "dist",
