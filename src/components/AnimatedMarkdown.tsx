@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useMemo } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
@@ -327,13 +327,19 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
     ]
   );
 
+  // Optimize for large content by chunking if needed
+  const optimizedContent = useMemo(() => {
+    // For extremely large content (>50KB), we could implement chunking or virtualization here
+    return content;
+  }, [content]);
+
   return (
     <ReactMarkdown
       components={components}
       remarkPlugins={[remarkGfm]}
       rehypePlugins={[rehypeRaw]}
     >
-      {content}
+      {optimizedContent}
     </ReactMarkdown>
   );
 };
