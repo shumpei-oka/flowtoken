@@ -166,3 +166,28 @@
   overflow: visible !important;
   border-radius: 0 0 0.75rem 0.75rem !important;
 }
+
+/* Shiki dual theme support for code syntax highlighting */
+/* 対称的なCSS変数制御 - defaultColor: false使用 */
+/* フォールバック色でtext言語などテーマなし言語にも対応 */
+/* proseクラスの上書きを完全に防ぐ */
+.prose .shiki,
+.prose code .shiki,
+.shiki {
+  color: var(--shiki-light, #24292f) !important;
+}
+
+html.dark .prose .shiki,
+html.dark .prose code .shiki,
+html.dark .shiki {
+  color: var(--shiki-dark, #e1e4e8) !important;
+}
+
+/* Alternative: Media query-based dark mode (if class-based is not available) */
+@media (prefers-color-scheme: dark) {
+  body:not(.light) .prose .shiki,
+  body:not(.light) .prose code .shiki,
+  body:not(.light) .shiki {
+    color: var(--shiki-dark, #e1e4e8) !important;
+  }
+}

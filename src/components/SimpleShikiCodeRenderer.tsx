@@ -37,19 +37,40 @@ const SimpleShikiCodeRenderer: React.FC<SimpleShikiCodeRendererProps> = ({
           ? codeContent.trimEnd()
           : codeContent;
 
-        // Use CSS variables for theme switching instead of JS detection
+        // Use dual themes with defaultColor: false for CSS variable consistency
         const { tokens } = await codeToTokens(processedCode, {
           lang: validLanguage,
-          theme: "github-light", // Fixed theme, will be overridden by CSS
+          themes: {
+            light: "github-light",
+            dark: "github-dark",
+          },
+          defaultColor: false,
         });
 
         // Apply animation logic similar to original customCodeRenderer
-        const rendered = tokens.map((line, lineIndex) => (
-          <div key={lineIndex} style={{ display: "block" }}>
-            {line.map((token, tokenIndex) => {
-              // Apply animation to each word like original customCodeRenderer
+        // Filter out empty lines and lines with only whitespace tokens
+        const rendered = tokens
+          .filter((line) => line.length > 0 && line.some(token => token.content.trim().length > 0))
+          .map((line, lineIndex) => (
+            <div key={lineIndex} style={{ display: "block" }}>
+              {line.map((token, tokenIndex) => {
+              // Debug: Log actual token structure in React component
+              if (lineIndex === 0 && tokenIndex < 3) {
+                console.log(`React Token ${tokenIndex}:`, {
+                  content: token.content,
+                  htmlStyle: (token as any).htmlStyle,
+                  hasShikiLight: (token as any).htmlStyle && '--shiki-light' in (token as any).htmlStyle,
+                  hasShikiDark: (token as any).htmlStyle && '--shiki-dark' in (token as any).htmlStyle
+                });
+              }
+              
+              // Use token.htmlStyle with CSS variables for dual themes
               return (
-                <span key={tokenIndex} style={{ color: token.color }}>
+                <span 
+                  key={tokenIndex} 
+                  style={(token as any).htmlStyle}
+                  className="shiki"
+                >
                   {token.content
                     .split(" ")
                     .map((word: string, wordIndex: number) => (
