@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@nvq/flowtoken':
-        specifier: ^1.1.2
-        version: 1.1.2(@types/react@18.3.23)(next@15.4.4(@babel/core@7.28.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-slot':
         specifier: ^1.2.3
         version: 1.2.3(@types/react@18.3.23)(react@18.3.1)
@@ -580,9 +577,6 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
-
-  '@nvq/flowtoken@1.1.2':
-    resolution: {integrity: sha512-ZFpAkrg2kNLP+TtEDbSGjGZnStl2AJAukNSE3r57pa4t+GakLCtQe4StkWWqVntIVQjNfsZlIftSOOz0HHK1Yw==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -3569,25 +3563,6 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
-
-  '@nvq/flowtoken@1.1.2(@types/react@18.3.23)(next@15.4.4(@babel/core@7.28.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@radix-ui/react-slot': 1.2.3(@types/react@18.3.23)(react@18.3.1)
-      '@tabler/icons-react': 3.34.1(react@18.3.1)
-      class-variance-authority: 0.7.1
-      clsx: 2.1.1
-      geist: 1.4.2(next@15.4.4(@babel/core@7.28.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
-      react-markdown: 9.1.0(@types/react@18.3.23)(react@18.3.1)
-      regexp-tree: 0.1.27
-      rehype-raw: 7.0.0
-      remark-gfm: 4.0.1
-      shiki: 3.8.1
-      tailwind-merge: 3.3.1
-    transitivePeerDependencies:
-      - '@types/react'
-      - next
-      - react
-      - supports-color
 
   '@pkgjs/parseargs@0.11.0':
     optional: true

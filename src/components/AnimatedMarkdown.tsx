@@ -235,7 +235,11 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
         <p {...props}>{animateText(props.children)}</p>
       ),
       //
-      li: ({ node, ...props }: any) => <li {...props}>{props.children}</li>,
+      li: ({ node, ...props }: any) => (
+        <li {...props} className="custom-li" style={animationStyle}>
+          {animateText(props.children)}
+        </li>
+      ),
       a: ({ node, ...props }: any) => (
         <a
           {...props}
@@ -303,7 +307,7 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
       tbody: ({ node, ...props }: any) => (
         <tbody {...props}>{props.children}</tbody>
       ),
-      tr: ({ node, ...props }: any) => <tr {...props}>{props.children}</tr>,
+      tr: ({ node, ...props }: any) => <tr {...props}>{animateText(props.children)}</tr>,
       th: ({ node, ...props }: any) => (
         <th {...props}>{animateText(props.children)}</th>
       ),
@@ -324,6 +328,8 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
       animation,
       animationDuration,
       animationTimingFunction,
+      animationStyle,
+      imgHeight,
     ]
   );
 
