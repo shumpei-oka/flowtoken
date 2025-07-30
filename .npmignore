@@ -162,3 +162,16 @@ build/
 # OS specific
 .DS_Store
 Thumbs.db
+
+# Development files
+.temp/
+*.temp.*
+debug-*.js
+test-*.js
+verify-*.js
+detailed-*.js
+
+# Storybook
+stories/
+.storybook/
+storybook-static/
