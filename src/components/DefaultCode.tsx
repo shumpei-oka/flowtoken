@@ -1,14 +1,13 @@
 'use client';
 import React from 'react';
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import customCodeRenderer from './CodeRenderer'; // Assuming CodeRenderer is in the same directory or adjust path
+import { IconCheck, IconCopy } from "@tabler/icons-react";
+import SimpleShikiCodeRenderer from './SimpleShikiCodeRenderer';
 
 interface DefaultCodeProps {
     node: any;
     className?: string;
     children: React.ReactNode & React.ReactNode[];
-    style?: React.CSSProperties; // For animationStyle
-    codeStyle?: any;
+    style?: React.CSSProperties;
     animateText: (text: any) => React.ReactNode;
     animation?: string;
     animationDuration?: string;
@@ -20,7 +19,6 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     className,
     children,
     style,
-    codeStyle,
     animateText,
     animation,
     animationDuration,
@@ -30,7 +28,6 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     const [copied, setCopied] = React.useState(false);
 
     const handleCopy = () => {
-        // Ensure children is a string for navigator.clipboard.writeText
         const textToCopy = Array.isArray(children) ? children.join('') : String(children);
         navigator.clipboard.writeText(textToCopy);
         setCopied(true);
@@ -38,47 +35,67 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     };
 
     if (!className || !className.startsWith("language-")) {
-        return <code {...props}>
-            {animateText(children)}
-        </code>;
+        return (
+            <code
+                {...props}
+                className="text-xs bg-zinc-100 dark:bg-zinc-800 py-0.5 px-1 rounded-md"
+            >
+                {animateText(children)}
+            </code>
+        );
     }
 
-    return <div {...props} style={style} className={`relative`}>
-        <button
-            onClick={handleCopy}
-            style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                position: 'absolute',
-                top: '0.5rem',
-                right: '0.5rem',
-                zIndex: 10,
-                opacity: 0.7,
-                cursor: 'pointer',
-                borderRadius: '0.5rem',
-                padding: '0.25rem 0.25rem',
-                color: 'white',
-            }}
-            aria-label={copied ? 'Copied!' : 'Copy code'}
-        >
-            {copied ? (
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6L9 17l-5-5" />
-                </svg>
-            ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                </svg>
-            )}
-        </button>
-        <SyntaxHighlighter
-            style={codeStyle}
-            language={className?.substring(9).trim() || ''}
-            renderer={customCodeRenderer({ animation, animationDuration, animationTimingFunction })}
-        >
-            {String(children) /* Ensure children is string for SyntaxHighlighter */}
-        </SyntaxHighlighter>
-    </div>;
+    const language = className?.substring(9).trim() || "text";
+
+    return (
+        <div {...props} style={style} className="relative my-2">
+            {/* Header section */}
+            <div className="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 px-1 py-1 rounded-t-xl border border-b-0 border-zinc-200 dark:border-zinc-700">
+                <div style={{ paddingLeft: '0.75rem' }}>
+                    <span className="text-xs text-zinc-900 dark:text-zinc-50">
+                        {language}
+                    </span>
+                </div>
+                <button
+                    className="flex items-center hover:bg-zinc-200 dark:hover:bg-zinc-700 gap-1 text-xs transition-colors duration-300 px-2 py-1 rounded-md"
+                    onClick={handleCopy}
+                    aria-label={copied ? "Copied!" : "Copy code"}
+                >
+                    {copied ? (
+                        <IconCheck
+                            className="w-3 h-3 text-green-500 transition-all duration-300"
+                            aria-hidden="true"
+                        />
+                    ) : (
+                        <IconCopy
+                            className="w-3 h-3 text-zinc-500 dark:text-zinc-400 transition-all duration-300"
+                            aria-hidden="true"
+                        />
+                    )}
+                    <span
+                        className={`transition-colors duration-300 ${
+                            copied ? "text-green-500" : "text-zinc-500 dark:text-zinc-400"
+                        }`}
+                    >
+                        {copied ? "Copied!" : "Copy"}
+                    </span>
+                </button>
+            </div>
+            {/* Content section */}
+            <div
+                className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900"
+                style={{ overflow: "visible" }}
+            >
+                <SimpleShikiCodeRenderer
+                    codeContent={String(children)}
+                    language={language}
+                    animation={animation}
+                    animationDuration={animationDuration}
+                    animationTimingFunction={animationTimingFunction}
+                />
+            </div>
+        </div>
+    );
 };
 
 export default DefaultCode;
