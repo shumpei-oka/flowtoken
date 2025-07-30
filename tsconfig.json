@@ -1,5 +1,6 @@
 {
   "include": ["src"], /* Include only the src directory */
+  "exclude": [".temp", "dist", "node_modules"],
   "compilerOptions": {
     "target": "es2017" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "lib": ["es2017", "dom"],
