@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { IconCheck, IconCopy } from "@tabler/icons-react";
-import SimpleShikiCodeRenderer from './SimpleShikiCodeRenderer';
+import CodeRenderer from './CodeRenderer';
 
 interface DefaultCodeProps {
     node: any;
@@ -86,7 +86,7 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
                 className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900"
                 style={{ overflow: "visible" }}
             >
-                <SimpleShikiCodeRenderer
+                <CodeRenderer
                     codeContent={String(children)}
                     language={language}
                     animation={animation}
