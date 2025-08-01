@@ -171,7 +171,7 @@
 /* 対称的なCSS変数制御 - defaultColor: false使用 */
 /* フォールバック色でtext言語などテーマなし言語にも対応 */
 /* proseクラスの上書きを完全に防ぐ */
-.prose .shiki,
+/* .prose .shiki,
 .prose code .shiki,
 .shiki {
   color: var(--shiki-light, #24292f) !important;
@@ -184,10 +184,350 @@ html.dark .shiki {
 }
 
 /* Alternative: Media query-based dark mode (if class-based is not available) */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   body:not(.light) .prose .shiki,
   body:not(.light) .prose code .shiki,
   body:not(.light) .shiki {
     color: var(--shiki-dark, #e1e4e8) !important;
   }
+} */
+
+/* React Syntax Highlighter - GitHub Theme CSS Variables */
+/* CSS Variables - Light Theme (GitHub Light) */
+html:not(.dark) {
+  --rsh-bg: hsl(300 50% 100%);
+  --rsh-text: hsl(210, 12%, 16%);
+  --rsh-comment: hsl(212, 8%, 45%);
+  --rsh-keyword: hsl(354, 66%, 54%);
+  --rsh-string: hsl(212, 94%, 20%);
+  --rsh-constant: hsl(212, 100%, 39%);
+  --rsh-function: hsl(261, 51%, 51%);
+  --rsh-variable: hsl(24, 92%, 46%);
+  --rsh-operator: hsl(24, 92%, 46%);
+  --rsh-punctuation: hsl(210, 12%, 16%);
+  --rsh-tag: hsl(134, 60%, 33%);
+  --rsh-property: hsl(212, 100%, 39%);
+  --rsh-url: hsl(212, 94%, 20%);
+}
+
+/* CSS Variables - Dark Theme (GitHub Dark) */
+html.dark {
+  --rsh-bg: hsl(240.02 6% 10%);
+  --rsh-text: hsl(214, 13%, 90%);
+  --rsh-comment: hsl(212, 8%, 45%);
+  --rsh-keyword: hsl(354, 92%, 72%);
+  --rsh-string: hsl(212, 100%, 81%);
+  --rsh-constant: hsl(212, 100%, 74%);
+  --rsh-function: hsl(261, 76%, 76%);
+  --rsh-variable: hsl(25, 100%, 72%);
+  --rsh-operator: hsl(25, 100%, 72%);
+  --rsh-punctuation: hsl(214, 13%, 90%);
+  --rsh-tag: hsl(135, 68%, 72%);
+  --rsh-property: hsl(212, 100%, 74%);
+  --rsh-url: hsl(210, 100%, 93%);
+}
+
+/* Base container styles */
+.prose .rsh-container,
+.rsh-container {
+  background: var(--rsh-bg) !important;
+  color: var(--rsh-text) !important;
+}
+
+/* Override react-syntax-highlighter default styles */
+.prose pre[class*="language-"],
+.prose code[class*="language-"],
+pre[class*="language-"],
+code[class*="language-"] {
+  background: var(--rsh-bg) !important;
+  color: var(--rsh-text) !important;
+  text-shadow: none !important;
+  font-family: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Monaco,
+    "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace !important;
+}
+
+/* Force text color for all syntax elements */
+.prose pre[class*="language-"] *,
+.prose code[class*="language-"] *,
+pre[class*="language-"] *,
+code[class*="language-"] * {
+  color: inherit !important;
+}
+
+/* Token styles based on test-complete-classes.js analysis */
+/* Comments */
+.prose .comment,
+.prose .token.comment,
+.prose .prolog,
+.prose .token.prolog,
+.prose .cdata,
+.prose .token.cdata,
+.prose code .comment,
+.prose code .token.comment,
+.prose code .prolog,
+.prose code .token.prolog,
+.prose code .cdata,
+.prose code .token.cdata,
+.comment,
+.token.comment,
+.prolog,
+.token.prolog,
+.cdata,
+.token.cdata {
+  color: var(--rsh-comment) !important;
+  font-style: italic !important;
+}
+
+/* Keywords */
+.prose .keyword,
+.prose .token.keyword,
+.prose .module,
+.prose .token.module,
+.prose code .keyword,
+.prose code .token.keyword,
+.prose code .module,
+.prose code .token.module,
+.keyword,
+.token.keyword,
+.module,
+.token.module {
+  color: var(--rsh-keyword) !important;
+}
+
+/* Strings */
+.prose .string,
+.prose .token.string,
+.prose .char,
+.prose .attr-value,
+.prose .selector,
+.prose .builtin,
+.prose .inserted,
+.prose .regex,
+.prose .imports,
+.prose .token.imports,
+.prose code .string,
+.prose code .token.string,
+.prose code .char,
+.prose code .attr-value,
+.prose code .selector,
+.prose code .builtin,
+.prose code .inserted,
+.prose code .regex,
+.prose code .imports,
+.prose code .token.imports,
+.string,
+.token.string,
+.char,
+.attr-value,
+.selector,
+.builtin,
+.inserted,
+.regex,
+.imports,
+.token.imports {
+  color: var(--rsh-string) !important;
+}
+
+/* Numbers and constants */
+.prose .number,
+.prose .token.number,
+.prose .boolean,
+.prose .token.boolean,
+.prose .constant,
+.prose .token.constant,
+.prose .attr-name,
+.prose .token.attr-name,
+.prose .class-name,
+.prose .token.class-name,
+.prose .maybe-class-name,
+.prose .token.maybe-class-name,
+.prose .atrule,
+.prose .token.atrule,
+.prose code .number,
+.prose code .token.number,
+.prose code .boolean,
+.prose code .token.boolean,
+.prose code .constant,
+.prose code .token.constant,
+.prose code .attr-name,
+.prose code .token.attr-name,
+.prose code .class-name,
+.prose code .token.class-name,
+.prose code .maybe-class-name,
+.prose code .token.maybe-class-name,
+.prose code .atrule,
+.prose code .token.atrule,
+.number,
+.token.number,
+.boolean,
+.token.boolean,
+.constant,
+.token.constant,
+.attr-name,
+.token.attr-name,
+.class-name,
+.token.class-name,
+.maybe-class-name,
+.token.maybe-class-name,
+.atrule,
+.token.atrule {
+  color: var(--rsh-constant) !important;
+}
+
+/* Functions and variables */
+.prose .function,
+.prose .token.function,
+.prose .method,
+.prose .token.method,
+.prose .variable,
+.prose .token.variable,
+.prose .operator,
+.prose .token.operator,
+.prose code .function,
+.prose code .token.function,
+.prose code .method,
+.prose code .token.method,
+.prose code .variable,
+.prose code .token.variable,
+.prose code .operator,
+.prose code .token.operator,
+.function,
+.token.function,
+.method,
+.token.method,
+.variable,
+.token.variable,
+.operator,
+.token.operator {
+  color: var(--rsh-function) !important;
+}
+
+/* Tags and properties */
+.prose .tag,
+.prose .token.tag,
+.prose .property,
+.prose .token.property,
+.prose .literal-property,
+.prose .token.literal-property,
+.prose .property-access,
+.prose .token.property-access,
+.prose .symbol,
+.prose .token.symbol,
+.prose .deleted,
+.prose .token.deleted,
+.prose .important,
+.prose .token.important,
+.prose code .tag,
+.prose code .token.tag,
+.prose code .property,
+.prose code .token.property,
+.prose code .literal-property,
+.prose code .token.literal-property,
+.prose code .property-access,
+.prose code .token.property-access,
+.prose code .symbol,
+.prose code .token.symbol,
+.prose code .deleted,
+.prose code .token.deleted,
+.prose code .important,
+.prose code .token.important,
+.tag,
+.token.tag,
+.property,
+.token.property,
+.literal-property,
+.token.literal-property,
+.property-access,
+.token.property-access,
+.symbol,
+.token.symbol,
+.deleted,
+.token.deleted,
+.important,
+.token.important {
+  color: var(--rsh-tag) !important;
+}
+
+/* Punctuation */
+.prose .punctuation,
+.prose .token.punctuation,
+.prose code .punctuation,
+.prose code .token.punctuation,
+.punctuation,
+.token.punctuation {
+  color: var(--rsh-punctuation) !important;
+}
+
+/* URLs */
+.prose .url,
+.prose .token.url,
+.prose code .url,
+.prose code .token.url,
+.url,
+.token.url {
+  color: var(--rsh-url) !important;
+}
+
+/* Modern Scrollbar Styling */
+/* Light theme scrollbars */
+html:not(.dark) *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html:not(.dark) *::-webkit-scrollbar-track {
+  background: hsl(210, 25%, 98%);
+  border-radius: 4px;
+}
+
+html:not(.dark) *::-webkit-scrollbar-thumb {
+  background: hsl(212, 8%, 45%);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+html:not(.dark) *::-webkit-scrollbar-thumb:hover {
+  background: hsl(210, 12%, 30%);
+}
+
+html:not(.dark) *::-webkit-scrollbar-corner {
+  background: hsl(210, 25%, 98%);
+}
+
+/* Dark theme scrollbars */
+html.dark *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html.dark *::-webkit-scrollbar-track {
+  background: hsl(210, 12%, 16%);
+  border-radius: 4px;
+}
+
+html.dark *::-webkit-scrollbar-thumb {
+  background: hsl(212, 8%, 45%);
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+html.dark *::-webkit-scrollbar-thumb:hover {
+  background: hsl(214, 13%, 60%);
+}
+
+html.dark *::-webkit-scrollbar-corner {
+  background: hsl(210, 12%, 16%);
+}
+
+/* Firefox scrollbar styling */
+html {
+  scrollbar-width: thin;
+}
+
+html:not(.dark) {
+  scrollbar-color: hsl(212, 8%, 45%) hsl(210, 25%, 98%);
+}
+
+html.dark {
+  scrollbar-color: hsl(212, 8%, 45%) hsl(210, 12%, 16%);
 }

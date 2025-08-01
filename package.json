@@ -1,7 +1,7 @@
 {
   "name": "@nvq/flowtoken",
-  "version": "1.2.6",
-  "description": "Animated React components for streaming text and markdown with modern design (forked from flowtoken)",
+  "version": "1.3.0",
+  "description": "Animated React components for streaming text and markdown with GitHub theme syntax highlighting (forked from flowtoken)",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && cp src/*.css dist && rm -rf dist/stories && rm -rf dist/src",
@@ -61,10 +61,8 @@
     "typescript": "^5.5.3"
   },
   "dependencies": {
-    "@radix-ui/react-slot": "^1.2.3",
     "@tabler/icons-react": "^3.34.1",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "geist": "^1.4.2",
     "react-markdown": "^9.0.1",
