@@ -43,7 +43,7 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     return (
       <code
         {...props}
-        className="text-xs bg-zinc-100 dark:bg-zinc-800 py-0.5 px-1 rounded-md"
+        className="text-xs font-normal bg-zinc-100 dark:bg-zinc-800 py-0.5 px-1 rounded-md"
       >
         {animateText(children)}
       </code>

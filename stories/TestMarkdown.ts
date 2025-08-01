@@ -49,7 +49,7 @@ If external images fail to load, these should work:
 3. **Initialize the Client**  
    Import and configure your FlowToken instance
 
-4. **Start Streaming**  
+4. **Start Streaming**
    Begin your streaming session with the configured client
 
 ### Unordered List without Code

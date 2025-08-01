@@ -1,6 +1,6 @@
 {
   "name": "@nvq/flowtoken",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Animated React components for streaming text and markdown with GitHub theme syntax highlighting (forked from flowtoken)",
   "main": "dist/index.js",
   "scripts": {

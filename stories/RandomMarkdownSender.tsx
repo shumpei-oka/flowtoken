@@ -27,7 +27,7 @@ const RandomTextSender: React.FC<RandomTextSenderProps> = ({
   const [tokenCount, setTokenCount] = useState<number>(0);
   const [controls, setControls] = useState({
     animation: "none",
-    sep: "word",
+    sep: "diff",
     windowSize: 5,
     delayMultiplier: 1.4,
     animationDuration: 0.6,
@@ -37,6 +37,7 @@ const RandomTextSender: React.FC<RandomTextSenderProps> = ({
   });
   const [slowSection, setSlowSection] = useState<boolean>(false);
   const [numId, setNumId] = useState<number>(0);
+  const [isInitialized, setIsInitialized] = useState<boolean>(false);
   // console.log('Controls:', controls);
   useEffect(() => {
     let extra = 0;
@@ -59,6 +60,8 @@ const RandomTextSender: React.FC<RandomTextSenderProps> = ({
 
   // Function to send a token at random intervals
   useEffect(() => {
+    if (!isInitialized) return; // Don't start until properly initialized
+    
     if (remainingTokens.length > 0) {
       // Jitter is up to 100ms more based on windowSize (unused)
       const jitter = Math.random() * 5;
@@ -72,19 +75,18 @@ const RandomTextSender: React.FC<RandomTextSenderProps> = ({
       }, networkDelay);
 
       return () => clearTimeout(timeout);
-    } else {
-      // reset the text when the animation changes
-      setTimeout(() => {
-        setNumId((prev) => prev + 1);
-      }, 1000);
     }
-  }, [remainingTokens, baseLatency]);
+  }, [remainingTokens, baseLatency, isInitialized]);
 
   // Initialize the tokens
   useEffect(() => {
-    setRemainingTokens(initialText.split(" ")); // Assuming space-separated tokens
+    setIsInitialized(false); // Reset initialization
+    const tokens = initialText.split(" ");
+    setRemainingTokens(tokens); // Assuming space-separated tokens
     setCurrentText("");
     setTokenCount(0);
+    console.log('🟢 Initializing with tokens:', tokens.length);
+    setIsInitialized(true); // Mark as initialized
   }, [initialText, numId]);
 
   const animationDurationString = `${controls.animationDuration}s`;
@@ -113,7 +115,7 @@ const RandomTextSender: React.FC<RandomTextSenderProps> = ({
         </div>
       </div>
       <div
-        className="text-sm w-1/2 prose prose-zinc dark:prose-invert lg:prose-md prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent prose-table:bg-transparent prose-thead:bg-transparent prose-tbody:bg-transparent prose-tr:bg-transparent prose-th:bg-transparent prose-td:bg-transparent"
+        className="text-sm flex-1 prose prose-zinc dark:prose-invert lg:prose-md max-w-none prose-pre:p-0 prose-pre:m-0 prose-pre:bg-transparent prose-table:bg-transparent prose-thead:bg-transparent prose-tbody:bg-transparent prose-tr:bg-transparent prose-th:bg-transparent prose-td:bg-transparent"
         style={{ height: "3000px" }}
       >
         {currentText.length > 0 && (

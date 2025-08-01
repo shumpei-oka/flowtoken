@@ -151,6 +151,41 @@
 
 :root {
   --ft-marker-animation: none;
+  --animation-duration: 0.6s;
+  --fade-animation-function: ease-out;
+}
+
+/* V3: Gemini-style animation classes */
+.pending {
+  opacity: 0;
+  animation-name: pending-pulse;
+  animation-duration: 0.1s;
+  animation-fill-mode: forwards;
+}
+
+.animating {
+  animation-name: fade-in-text;
+  animation-duration: var(--animation-duration);
+  animation-timing-function: var(--fade-animation-function);
+  animation-fill-mode: forwards;
+}
+
+@keyframes pending-pulse {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in-text {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .ft-custom-li::marker {
@@ -167,30 +202,15 @@
   border-radius: 0 0 0.75rem 0.75rem !important;
 }
 
-/* Shiki dual theme support for code syntax highlighting */
-/* 対称的なCSS変数制御 - defaultColor: false使用 */
-/* フォールバック色でtext言語などテーマなし言語にも対応 */
-/* proseクラスの上書きを完全に防ぐ */
-/* .prose .shiki,
-.prose code .shiki,
-.shiki {
-  color: var(--shiki-light, #24292f) !important;
+.prose code::before,
+.prose code::after {
+  content: none !important;
 }
 
-html.dark .prose .shiki,
-html.dark .prose code .shiki,
-html.dark .shiki {
-  color: var(--shiki-dark, #e1e4e8) !important;
+.prose blockquote p::before,
+.prose blockquote p::after {
+  content: none !important;
 }
-
-/* Alternative: Media query-based dark mode (if class-based is not available) */
-/* @media (prefers-color-scheme: dark) {
-  body:not(.light) .prose .shiki,
-  body:not(.light) .prose code .shiki,
-  body:not(.light) .shiki {
-    color: var(--shiki-dark, #e1e4e8) !important;
-  }
-} */
 
 /* React Syntax Highlighter - GitHub Theme CSS Variables */
 /* CSS Variables - Light Theme (GitHub Light) */
