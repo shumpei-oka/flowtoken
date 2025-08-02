@@ -43,7 +43,7 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
     return (
       <code
         {...props}
-        className="text-xs font-normal bg-zinc-100 dark:bg-zinc-800 py-0.5 px-1 rounded-md"
+        className="ft-inline-code"
       >
         {animateText(children)}
       </code>
@@ -53,37 +53,34 @@ const DefaultCode: React.FC<DefaultCodeProps> = ({
   const language = className?.substring(9).trim() || "text";
 
   return (
-    <div {...props} style={style} className="relative my-2">
+    <div {...props} className="ft-code-container" style={style}>
       {/* Header section */}
-      <div className="flex justify-between items-center bg-zinc-100 dark:bg-zinc-800 px-1 py-1 rounded-t-xl border border-b-0 border-zinc-200 dark:border-zinc-700">
+      <div className="ft-code-header">
         <div style={{ paddingLeft: "0.75rem" }}>
-          <span className="text-xs text-zinc-900 dark:text-zinc-50">
+          <span className="ft-code-language">
             {language}
           </span>
         </div>
         <button
-          className="flex items-center hover:bg-zinc-200 dark:hover:bg-zinc-700 gap-1 text-xs transition-colors duration-300 p-1.5 rounded-lg"
+          className="ft-copy-button"
           onClick={handleCopy}
           aria-label={copied ? "Copied!" : "Copy code"}
         >
           {copied ? (
             <IconCheck
-              className="w-3 h-3 text-green-500 transition-all duration-300"
+              className="ft-copy-icon ft-copy-icon-success"
               aria-hidden="true"
             />
           ) : (
             <IconCopy
-              className="w-3 h-3 text-zinc-500 dark:text-zinc-400 transition-all duration-300"
+              className="ft-copy-icon ft-copy-icon-default"
               aria-hidden="true"
             />
           )}
         </button>
       </div>
       {/* Content section with CSS variables control */}
-      <div
-        className="border border-zinc-200 dark:border-zinc-700 rounded-b-xl dark:bg-zinc-900 rsh-container"
-        style={{ overflow: "visible" }}
-      >
+      <div className="ft-code-content rsh-container">
         <SyntaxHighlighter
           useInlineStyles={false} // Critical: Use CSS classes instead of inline styles
           language={language}

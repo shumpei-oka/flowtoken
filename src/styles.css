@@ -551,3 +551,96 @@ html:not(.dark) {
 html.dark {
   scrollbar-color: hsl(212, 8%, 45%) hsl(210, 12%, 16%);
 }
+
+/* FlowToken DefaultCode Component Styles */
+.ft-inline-code {
+  font-size: 0.75rem;
+  font-weight: normal;
+  background-color: #f4f4f5;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.375rem;
+}
+
+html.dark .ft-inline-code {
+  background-color: #27272a;
+}
+
+.ft-code-container {
+  position: relative;
+  margin: 0.5rem 0;
+}
+
+.ft-code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f4f4f5;
+  padding: 0.25rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+  border: 1px solid #e4e4e7;
+  border-bottom: none;
+}
+
+html.dark .ft-code-header {
+  background-color: #27272a;
+  border-color: #3f3f46;
+}
+
+.ft-code-language {
+  font-size: 0.75rem;
+  color: #18181b;
+}
+
+html.dark .ft-code-language {
+  color: #fafafa;
+}
+
+.ft-copy-button {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  padding: 0.375rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.ft-copy-button:hover {
+  background-color: #e4e4e7;
+}
+
+html.dark .ft-copy-button:hover {
+  background-color: #3f3f46;
+}
+
+.ft-copy-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+  transition: all 0.3s;
+}
+
+.ft-copy-icon-default {
+  color: #71717a;
+}
+
+html.dark .ft-copy-icon-default {
+  color: #a1a1aa;
+}
+
+.ft-copy-icon-success {
+  color: #22c55e;
+}
+
+.ft-code-content {
+  border: 1px solid #e4e4e7;
+  border-radius: 0 0 0.75rem 0.75rem;
+  overflow: visible;
+}
+
+html.dark .ft-code-content {
+  border-color: #3f3f46;
+  background-color: #0c0a09;
+}
