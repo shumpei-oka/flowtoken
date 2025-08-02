@@ -1,6 +1,6 @@
 {
   "name": "@nvq/flowtoken",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Animated React components for streaming text and markdown with GitHub theme syntax highlighting (forked from flowtoken)",
   "main": "dist/index.js",
   "scripts": {
@@ -70,7 +70,6 @@
     "regexp-tree": "^0.1.27",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
-    "shiki": "^3.8.1",
     "tailwind-merge": "^3.3.1"
   }
 }
