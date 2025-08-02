@@ -28,7 +28,7 @@ const CustomComponent = ({ content }: { content: string }) => {
         >
             {removedBraces}
             <div 
-                className="invisible group-hover:visible absolute z-10 w-64 p-2 mt-2 text-sm bg-white border rounded shadow-lg transition-all duration-200"
+                className="invisible group-hover:visible absolute z-10 w-64 p-2 mt-2 text-sm bg-white border rounded-sm shadow-lg transition-all duration-200"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >

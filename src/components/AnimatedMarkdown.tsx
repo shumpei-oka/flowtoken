@@ -72,7 +72,7 @@ const MemoizedList = React.memo(
 const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
   content,
   sep = "diff",
-  animation: animationName = "fadeIn",
+  animation: animationName = "none",
   animationDuration = "1s",
   animationTimingFunction = "ease-in-out",
   codeStyle = null,
