@@ -29,7 +29,7 @@
     "type": "git",
     "url": "git+https://github.com/shumpei-oka/flowtoken.git"
   },
-  "homepage": "https://github.com/shumpei-oka/flowtoken#readme",
+  "homepage": "https://flow-token-demo.vercel.app/",
   "bugs": {
     "url": "https://github.com/shumpei-oka/flowtoken/issues"
   },
