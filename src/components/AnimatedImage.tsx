@@ -56,4 +56,13 @@ const AnimatedImage: React.FC<AnimatedImageProps>  = ({
     );
 };
 
-export default AnimatedImage;
+// メモ化：同じsrcの場合は再レンダリングを防ぐ
+export default React.memo(AnimatedImage, (prevProps, nextProps) => {
+  return prevProps.src === nextProps.src &&
+         prevProps.alt === nextProps.alt &&
+         prevProps.animation === nextProps.animation &&
+         prevProps.animationDuration === nextProps.animationDuration &&
+         prevProps.animationTimingFunction === nextProps.animationTimingFunction &&
+         prevProps.height === nextProps.height &&
+         prevProps.width === nextProps.width;
+});
