@@ -135,6 +135,22 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
     [customComponents]
   );
 
+  // Stable img component function to prevent re-rendering
+  const imgComponent = React.useCallback(
+    ({ node, ...props }: any) => (
+      <AnimatedImage
+        src={props.src}
+        height={imgHeight}
+        alt={props.alt}
+        animation={animation || ""}
+        animationDuration={animationDuration}
+        animationTimingFunction={animationTimingFunction}
+        animationIterationCount={1}
+      />
+    ),
+    [animation, animationDuration, animationTimingFunction, imgHeight]
+  );
+
   // V2: Simplified animateText function for SplitTextV4 compatibility
   const animateText = React.useCallback(
     (text: string | Array<any>) => {
@@ -258,17 +274,7 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
         );
       },
       hr: ({ node, ...props }: any) => <hr {...props} />,
-      img: ({ node, ...props }: any) => (
-        <AnimatedImage
-          src={props.src}
-          height={imgHeight}
-          alt={props.alt}
-          animation={animation || ""}
-          animationDuration={animationDuration}
-          animationTimingFunction={animationTimingFunction}
-          animationIterationCount={1}
-        />
-      ),
+      img: imgComponent,
       table: ({ node, ...props }: any) => (
         <table {...props}>{props.children}</table>
       ),
@@ -293,6 +299,7 @@ const MarkdownAnimateText: React.FC<MarkdownAnimateTextProps> = ({
       animationStyle,
       codeStyle,
       imgHeight,
+      imgComponent,
     ]
   );
 
