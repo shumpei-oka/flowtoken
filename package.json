@@ -1,6 +1,6 @@
 {
   "name": "@nvq/flowtoken",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Animated React components for streaming text and markdown with GitHub theme syntax highlighting (forked from flowtoken)",
   "main": "dist/index.js",
   "scripts": {
@@ -64,7 +64,6 @@
     "@tabler/icons-react": "^3.34.1",
     "@types/react-syntax-highlighter": "^15.5.13",
     "clsx": "^2.1.1",
-    "geist": "^1.4.2",
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.6.1",
     "regexp-tree": "^0.1.27",
